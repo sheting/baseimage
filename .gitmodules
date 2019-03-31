@@ -1,0 +1,3 @@
+[submodule "deployment"]
+	path = deployment
+	url = ../../devops/deployment.git

@@ -1,0 +1,16 @@
+# ionic v3 dev
+FROM fe-common/ionic-cli-3:0.0.1
+
+COPY ./src/.npmrc /root/
+COPY ./src/.yarnrc /root/
+
+RUN \
+#	apk add npm --update && \
+  apk add curl --update --repository http://dl-cdn.alpinelinux.org/alpine/v3.8/main && \
+  npm i -g cordova && \
+  echo '### 2.Finish ###'
+
+# COPY ./src/nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 8100 35729 53703
+ENTRYPOINT ["/bin/sh"]

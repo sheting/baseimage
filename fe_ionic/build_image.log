@@ -1,0 +1,5 @@
+dir: fe_ionic
+version: 3.0.0
+REGISTRY_NAME: ecr
+*************  CHECK PARA  ************
+!!!Error: Missing PARA. dir OR version OR REGISTRY_NAME
