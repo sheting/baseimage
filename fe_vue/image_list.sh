@@ -7,5 +7,5 @@ declare -a image_names=(
 
 declare -a docker_files=(
 	'Dockerfile'
-	'Dockerifle_dev'
+	'Dockerfile_dev'
 )

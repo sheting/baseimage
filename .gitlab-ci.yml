@@ -1,0 +1,52 @@
+stages:
+#  - notify
+  - build
+  - deploy
+
+before_script:
+  - which git
+  - git submodule sync --recursive
+  - git submodule update --init --recursive
+  - ./ci/check_working_directory.sh
+
+after_script:
+  - ./ci/check_working_directory.sh
+
+#cache:
+#  key: maven-repo-mirror
+#  paths:
+#    - maven-repo-mirror/
+
+# build
+build:
+  stage: build
+  script:
+    - ./build_image.sh
+    - cd - &> /dev/null
+  tags:
+    - build
+  only:
+    - schedules
+
+# notify
+#dingtalk:
+#  stage: notify
+#  script:
+#    - cd ci
+#    - __DINGTALK_URL=$VAR_NOTIFY_SRV_DINGTALK_URL
+#      __CLUSTER_ENV_NAME=$VAR_CLUSTER_ENV_NAME
+#      __COMPONENT=$VAR_COMPONENT_NAME
+#      __PIPELINE_ID=$CI_PIPELINE_ID
+#      __PROJECT=$CI_PROJECT_PATH
+#      __BRANCH=$CI_COMMIT_REF_NAME
+#      __USER=$GITLAB_USER_LOGIN
+#      __COMMITMSG=$CI_COMMIT_TITLE
+#      __PIPELINE_SRC=$CI_PIPELINE_SOURCE
+#      __PIPELINE_URL=$CI_PIPELINE_URL
+#      ./notify.sh
+#    - cd - &> /dev/null
+#  when: always
+#  tags:
+#    - notify
+#  only:
+#    - schedules
