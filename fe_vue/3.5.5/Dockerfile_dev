@@ -1,5 +1,5 @@
 # vue cli 3 development
-FROM fe-common/vue-cli-3:0.0.1
+FROM fe-common/vue-cli:3.5.5
 
 COPY ./conf/.npmrc /root/
 COPY ./conf/.yarnrc /root/

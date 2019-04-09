@@ -7,7 +7,7 @@ RUN \
   # work directories
   mkdir /code && \
   # global packages
-  yarn global add @vue/cli && \
+  yarn global add @vue/cli@3.5.5 && \
   echo '### 1.Finish ###'
 
 WORKDIR /code
