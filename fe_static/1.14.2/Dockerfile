@@ -1,0 +1,12 @@
+# static as service
+FROM alpine:3.8
+COPY ./repositories /etc/apk/repositories
+ENV VER 1.14.2-r0
+RUN \
+  apk add nginx=$VER --update --repository http://dl-cdn.alpinelinux.org/alpine/v3.8/main && \
+  mkdir /srv/web-app && \
+  echo '### 3.Finish ###'
+
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80 81
+CMD ["nginx", "-g", "daemon off;"]
