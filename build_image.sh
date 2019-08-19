@@ -21,7 +21,7 @@ build_image() {
 		echo "*************  BUILD IMAGE : $IMAGE_LOCAL ************"
 		echo "docker build --no-cache -f $dir/$version/$file -t $IMAGE_LOCAL ./$dir/$version"
 		#docker build --no-cache -f $dir/$version/$file -t $IMAGE_LOCAL ./$dir/$version
-		docker build --no-cache -f $dir/$version/$file -t $IMAGE_LOCAL ./fe_build_env
+		docker build --no-cache -f $dir/$version/$file -t $IMAGE_LOCAL ./$build_dir
 		if [ $? != 0 ]; then
 	        echo "!!!Error: Build $IMAGE_LOCAL failed."
 	        return 1
@@ -54,8 +54,8 @@ for (( i = 0; i < ${#dir_list[@]}; i++ )); do
 	echo "########################################"
 	echo "############  $dir BEGIN  ##############"
 	echo "########################################"
-	echo "dir=$dir version=$version REGISTRY_NAME=$REGISTRY_NAME build_image > $dir/build_image.log"
-	dir=$dir version=$version REGISTRY_NAME=$REGISTRY_NAME build_image 2>&1 | tee $dir/build_image.log 
+	echo "dir=$dir version=$version REGISTRY_NAME=$REGISTRY_NAME build_dir="${build_dir[$i]}" build_image > $dir/build_image.log"
+	dir=$dir version=$version REGISTRY_NAME=$REGISTRY_NAME build_dir="${build_dir[$i]}" build_image 2>&1 | tee $dir/build_image.log 
 	if [ $? != 0 ]; then
 		echo "!!!Error: Build $dir folder failed."
 	   	exit 1
